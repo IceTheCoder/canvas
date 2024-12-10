@@ -1,0 +1,35 @@
+.cell {
+  background: #323232;
+  width: 3vw;
+  height: 3vw;
+}
+.off:hover {
+  background: #525252;
+}
+.on {
+  background: #727272;
+}
+.on:hover {
+  background: #929292;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.cell {
+  margin: 1px;
+}
+
+body {
+  background: #121212;
+  color: white;
+}
+
+
