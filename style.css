@@ -1,7 +1,16 @@
 .cell {
-  background: blue;
+  background: #323232;
   width: 30px;
   height: 30px;
+}
+.off:hover {
+  background: #525252;
+}
+.on {
+  background: #727272;
+}
+.on:hover {
+  background: #929292;
 }
 
 #container {
@@ -17,3 +26,10 @@
 .cell {
   margin: 1px;
 }
+
+body {
+  background: #121212;
+  color: white;
+}
+
+
