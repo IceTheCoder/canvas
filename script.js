@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   let canvasSize = 28;
 
+  let isDrawing = false;
+
   let container = document.getElementById("grid-container");
 
   for (let i = 0; i < canvasSize; i++) {
@@ -8,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     miniContainer.classList.add(`mini-container`);
     miniContainer.id = `mini-container-${i}`;
     container.appendChild(miniContainer);
+
     for (let j = 0; j < canvasSize; j++) {
       cell = document.createElement("div");
       cell.classList.add("cell");
@@ -18,9 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function toggleCellClass(cell) {
+    cell.classList.remove("off");
+    cell.classList.add("on");
+  }
+
   document.querySelectorAll('.cell').forEach((element, index) => {
-    element.addEventListener('click', () => {
-      element.classList.add("on");
+    element.addEventListener("mousedown", (event) => {
+      isDrawing = true;
+      toggleCellClass(event.target);
+    });
+
+    element.addEventListener("mouseover", (event) => {
+      if (isDrawing) {
+        toggleCellClass(event.target);
+      }
+    });
+  });
+
+  document.querySelectorAll("*").forEach((element) => {
+    element.draggable = false;
+
+    element.addEventListener("dragstart", (event) => {
+      event.preventDefault();
+    })
+
+    element.addEventListener("mouseup", () => {
+      isDrawing = false;
     });
   });
 });
