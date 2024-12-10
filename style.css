@@ -1,0 +1,19 @@
+.cell {
+  background: blue;
+  width: 30px;
+  height: 30px;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.cell {
+  margin: 1px;
+}
