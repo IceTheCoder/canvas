@@ -1,7 +1,9 @@
 .cell {
   background: #323232;
-  width: 3vw;
-  height: 3vw;
+  width: 15px;
+  height: 15px;
+  max-width: 3vw;
+  max-height: 3vw;
 }
 .off:hover {
   background: #525252;
@@ -30,6 +32,8 @@
 body {
   background: #121212;
   color: white;
+  height: 100%;
+  overflow: hidden;
 }
 
 
