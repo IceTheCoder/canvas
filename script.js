@@ -72,4 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
   container.addEventListener("touchend", () => {
     isDrawing = false;
   });
+
+  document.getElementById("delete-btn").addEventListener("click", () => {
+    document.querySelectorAll(".cell").forEach((element) => {
+      element.classList.remove("on");
+      element.classList.add("off");
+    });
+  });
 });
+
