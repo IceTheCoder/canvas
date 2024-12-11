@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleCellClass(event.target);
     });
 
-    element.addEventListener("mouseover", (event) => {
+    element.addEventListener("mouseenter", (event) => {
       if (isDrawing) {
         toggleCellClass(event.target);
       }
@@ -49,5 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
     element.addEventListener("mouseup", () => {
       isDrawing = false;
     });
+  });
+
+  // Touch support (❤️ ChatGPT)
+  container.addEventListener("touchstart", (event) => {
+  let touch = event.targetTouches[0];
+  let cell = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (cell && cell.classList.contains("cell")) {
+      isDrawing = true;
+      toggleCellClass(cell);
+    }
+  });
+  
+  container.addEventListener("touchmove", (event) => {
+    let touch = event.targetTouches[0];
+    let cell = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (isDrawing && cell && cell.classList.contains("cell")) {
+      toggleCellClass(cell);
+    }
+  });
+  
+  container.addEventListener("touchend", () => {
+    isDrawing = false;
   });
 });
