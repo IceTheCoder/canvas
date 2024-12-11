@@ -34,6 +34,25 @@ body {
   color: white;
   height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+#delete-btn {
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  background: #525252;
+  border: none;
+  font-size: 24px;
+  color: white;
+}
 
+#delete-btn:hover {
+  background: #727272;
+}
+
+#delete-btn:active {
+  background: #929292;
+}
