@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     container.appendChild(miniContainer);
 
     for (let j = 0; j < canvasSize; j++) {
-      cell = document.createElement("div");
+      let cell = document.createElement("div");
       cell.classList.add("cell");
       cell.classList.add("off");
     
@@ -26,15 +26,30 @@ document.addEventListener('DOMContentLoaded', () => {
     cell.classList.add("on");
   }
 
-  document.querySelectorAll('.cell').forEach((element, index) => {
+  function toggleBrushArea(i, j) {
+    for (let x = i; x < i + 2; x++) {
+      for (let y = j; y < j + 2; y++) {
+        if (x < canvasSize && y < canvasSize) {
+          let targetCell = document.getElementById(`${x}-${y}`);
+          if (targetCell) {
+            toggleCellClass(targetCell);
+          }
+        }
+      }
+    }
+  }
+
+  document.querySelectorAll('.cell').forEach((element) => {
     element.addEventListener("mousedown", (event) => {
       isDrawing = true;
-      toggleCellClass(event.target);
+      let [i, j] = event.target.id.split("-").map(Number);
+      toggleBrushArea(i, j);
     });
 
     element.addEventListener("mouseenter", (event) => {
       if (isDrawing) {
-        toggleCellClass(event.target);
+        let [i, j] = event.target.id.split("-").map(Number);
+        toggleBrushArea(i, j);
       }
     });
   });
@@ -44,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     element.addEventListener("dragstart", (event) => {
       event.preventDefault();
-    })
+    });
 
     element.addEventListener("mouseup", () => {
       isDrawing = false;
@@ -53,22 +68,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Touch support (❤️ ChatGPT)
   container.addEventListener("touchstart", (event) => {
-  let touch = event.targetTouches[0];
-  let cell = document.elementFromPoint(touch.clientX, touch.clientY);
+    let touch = event.targetTouches[0];
+    let cell = document.elementFromPoint(touch.clientX, touch.clientY);
     if (cell && cell.classList.contains("cell")) {
+      let [i, j] = cell.id.split("-").map(Number);
       isDrawing = true;
-      toggleCellClass(cell);
+      toggleBrushArea(i, j);
     }
   });
-  
+
   container.addEventListener("touchmove", (event) => {
     let touch = event.targetTouches[0];
     let cell = document.elementFromPoint(touch.clientX, touch.clientY);
     if (isDrawing && cell && cell.classList.contains("cell")) {
-      toggleCellClass(cell);
+      let [i, j] = cell.id.split("-").map(Number);
+      toggleBrushArea(i, j);
     }
   });
-  
+
   container.addEventListener("touchend", () => {
     isDrawing = false;
   });
@@ -80,4 +97,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
